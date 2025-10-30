@@ -3,8 +3,8 @@ This repository contains ROS packages that implement the visualisation and contr
 
 Before running this code, ensure you have added the following lines to your Dockerfile and rebuilded your ros2 docker image:
 ``` bash
-RUN apt-get install -y ros-humble-ros-ign-bridge && \
-apt-get install -y ros-humble-ros-gz && \
+RUN apt-get install ros-humble-ros-ign-bridge -y && \
+apt-get install ros-humble-ros-gz -y && \
 apt-get install ros-humble-controller-manager -y && \
 apt-get install ros-humble-ros2-control -y && \
 apt-get install ros-humble-ros2-controllers -y && \
@@ -12,6 +12,18 @@ apt-get install ros-humble-ign-ros2-control -y && \
 apt-get install ros-humble-joint-state-publisher -y && \
 apt-get install ros-humble-joint-state-publisher-gui -y && \
 apt-get install ros-humble-xacro -y && \
-apt-get install ros-humble-urdf-launch && \
-apt-get install ros-humble-urdf-tutorial ```
+apt-get install ros-humble-urdf-launch -y && \
+apt-get install ros-humble-urdf-tutorial -y
+```
 
+If you're not using ros2 as a docker image, simply install that packages. Eventually substitute the humble voice with your ros2 version.
+
+To check the visualization of the Armando robot in rviz, execute the following command:
+``` bash
+ros2 launch armando_description armando_display.launch,py
+```
+By doing so, you should also see the images from the camera placed on the base_link of Armando, which displays a bottom-up point of view of the robot.
+You could also check the image of the camera executing from another terminal the following line:
+``` bash
+rqt qualcosa
+``` 
