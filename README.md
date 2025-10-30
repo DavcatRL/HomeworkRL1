@@ -15,7 +15,7 @@ apt-get install ros-humble-xacro -y && \
 apt-get install ros-humble-urdf-launch -y && \
 apt-get install ros-humble-urdf-tutorial -y
 ```
-If you're not using ros2 as a docker image, simply install that packages. Eventually substitute the humble voice with your ros2 version.
+If you're not using ros2 as a docker image, simply install that packages. Eventually replace the humble voice with your ros2 version.
 
 To check the visualization of the Armando robot in rviz, execute the following command:
 ``` bash
@@ -33,6 +33,12 @@ ros2 launch armando_gazebo armando_world.launch.py
 ```
 This will start both Gazebo and Rviz simultaneously.
 
+To control the Armando robot in a desired configuration of the joints, open another terminal and paste the following command:
+``` bash
+ros2 topic pub /position_controller/commands std_msgs/msg/Float64MultiArray "data: [0.9, -0.6, 0.3, 0.0]"
+```
+Replace the four numbers of the data with the configuration you desire for the j0, j1, j2, j3 joints. 
+
 You can control the Armando robot through the arm_controller_node node. Once the simulation has started, open another terminal and execute one of the following commands:
 ``` bash
 ros2 run armando_controller arm_controller_node --ros-args -p controller_type:=position
@@ -42,4 +48,4 @@ if you want to control the position,
 ros2 run armando_controller arm_controller_node --ros-args -p controller_type:=trajectory
 ```
 if you want to control the trajectory.
-These controllers will move the robot's joints to a predefined position, characterised by the following vector of the positions of Armando's individual movable joints.
+These controllers will move the robot's joints to a predefined position, characterised by the following vector of the positions of Armando's individual movable joints: [0.9, -0.6, 0.3, 0.1], defined in the arm_controller_node. 
